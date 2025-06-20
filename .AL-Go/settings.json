@@ -6,5 +6,35 @@
   ],
   "appFolders": [],
   "testFolders": [],
-  "bcptTestFolders": []
+  "bcptTestFolders": [],
+  "ConditionalSettings": [
+    {
+      "branches": ["staging"],
+      "settings": {
+        "appDependencyProbingPaths": [
+          {
+            "repo": "<YourOrg>/<YourStagingDependenciesRepo>",
+            "branch": "main",
+            "release_status": "latestBuild",
+            "AuthTokenSecret": "GhTokenWorkflow"
+          }
+        ],
+        "ContinuousDeployment": true
+      }
+    },
+    {
+      "branches": ["main", "release/*"],
+      "settings": {
+        "appDependencyProbingPaths": [
+          {
+            "repo": "<YourOrg>/<YourProductionDependenciesRepo>",
+            "branch": "main",
+            "release_status": "release",
+            "AuthTokenSecret": "GhTokenWorkflow"
+          }
+        ],
+        "ContinuousDeployment": false
+      }
+    }
+  ]
 }
